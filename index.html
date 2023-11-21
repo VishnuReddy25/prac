@@ -6,14 +6,45 @@
   <title>Registration Form</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
   <style>
+    /* Change the background color of the button on hover to a darker shade of red */
     .bg-red-500:hover {
       background-color: #f44336;
     }
 
-    .bg-red-500, .bg-red-500:hover {
-      font-family: 'Roboto', sans-serif;
-      font-size: 16px;
-      font-weight: bold;
+    /* Change the font family of the button and heading to 'Open Sans' and increase the font size to 18px */
+    .bg-red-500, .bg-red-500:hover, h2 {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+    }
+
+    /* Add a margin-bottom to the form elements to create more spacing between them */
+    .mb-5 {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Add a border-radius to the input fields to make them look more polished */
+    input {
+      border-radius: 0.25rem;
+    }
+
+    /* Add a padding to the table cells to make the content more visually appealing */
+    .border, .p-2 {
+      padding: 0.5rem;
+    }
+
+    /* Remove the default border from the table to create a more modern look */
+    table {
+      border: none;
+    }
+
+    /* Add a border-bottom to each table row to separate the rows visually */
+    tr {
+      border-bottom: 1px solid #ccc;
+    }
+
+    /* Add a left margin to the checkbox to align it with the label */
+    #acceptedTerms {
+      margin-left: 0.5rem;
     }
   </style>
 </head>
@@ -24,19 +55,19 @@
       <form id="registrationForm">
         <div class="mb-5">
           <label for="name" class="block mb-1">Full Name</label>
-          <input type="text" id="name" name="name" required class="w-full p-2 border border-gray-300 rounded">
+          <input type="text" id="name" name="name" required class="w-full p-2 border rounded">
         </div>
         <div class="mb-5">
           <label for="email" class="block mb-1">Email</label>
-          <input type="email" id="email" name="email" required class="w-full p-2 border border-gray-300 rounded">
+          <input type="email" id="email" name="email" required class="w-full p-2 border rounded">
         </div>
         <div class="mb-5">
           <label for="password" class="block mb-1">Password</label>
-          <input type="password" id="password" name="password" required class="w-full p-2 border border-gray-300 rounded">
+          <input type="password" id="password" name="password" required class="w-full p-2 border rounded">
         </div>
         <div class="mb-5">
           <label for="dob" class="block mb-1">Date of Birth</label>
-          <input type="date" id="dob" name="dob" required class="w-full p-2 border border-gray-300 rounded">
+          <input type="date" id="dob" name="dob" required class="w-full p-2 border rounded">
         </div>
         <div class="mb-5">
           <input type="checkbox" id="acceptedTerms" name="acceptedTerms" required>
@@ -50,20 +81,4 @@
   </div>
 
   <div class="container mx-auto my-10 p-10 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-bold mb-5 mt-10">Registered Users</h2>
-    <table class="w-full border border-gray-300">
-      <thead>
-        <tr>
-          <th class="border border-gray-300 p-2">Name</th>
-          <th class="border border-gray-300 p-2">Email</th>
-          <th class="border border-gray-300 p-2">Password</th>
-          <th class="border border-gray-300 p-2">Dob</th>
-          <th class="border border-gray-300 p-2">Accepted terms?</th>
-        </tr>
-      </thead>
-      <tbody id="userTableBody"></tbody>
-    </table>
-  </div>
-  <script src="./index.js"></script>
-</body>
-</html>
+    <
