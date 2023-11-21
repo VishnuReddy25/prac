@@ -1,72 +1,69 @@
+window.addEventListener('DOMContentLoaded', function() {
+  const userTableBody = document.querySelector('#userTableBody');
 
-document.addEventListener('DOMContentLoaded', () => {
-    const userTableBody = document.getElementById('userTableBody');
-
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith('user_')) {
-            const userData = JSON.parse(localStorage.getItem(key));
-            addRowToTable(userTableBody, userData);
-        }
+  for (const key of Object.keys(localStorage)) {
+    if (key.startsWith('user_')) {
+      const userData = JSON.parse(localStorage.getItem(key));
+      createUserTableRow(userData);
     }
+  }
 });
 
-const form = document.getElementById('registrationForm');
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+const registrationForm = document.getElementById('registrationForm');
+registrationForm.addEventListener('submit', function(event) {
+  event.preventDefault();
 
-    const dob = new Date(form.dob.value);
-    const currentYear = new Date().getFullYear();
-    const age = currentYear - dob.getFullYear();
+  const dateOfBirth = new Date(registrationForm.elements.dob.value);
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - dateOfBirth.getFullYear();
 
-    // Validate age to accept users between 18 and 55 years old
-    if (age < 18 || age > 55) {
-        alert('Age should be between 18 and 55.');
-        return;
-    }
+  // Validate age to accept users between 18 and 55 years old
+  if (age < 18 || age > 55) {
+    alert('Age should be between 18 and 55.');
+    return;
+  }
 
-    const userKey = 'user_' + Date.now();
-    localStorage.setItem(userKey, JSON.stringify({
-        name: form.name.value,
-        email: form.email.value,
-        password: form.password.value,
-        dob: form.dob.value,
-        acceptedTerms: form.acceptedTerms.checked
-    }));
+  const userKey = 'user_' + Date.now();
+  localStorage.setItem(userKey, JSON.stringify({
+    name: registrationForm.elements.name.value,
+    email: registrationForm.elements.email.value,
+    password: registrationForm.elements.password.value,
+    dob: registrationForm.elements.dob.value,
+    acceptedTerms: registrationForm.elements.acceptedTerms.checked
+  }));
 
-    const userTableBody = document.getElementById('userTableBody');
-    addRowToTable(userTableBody, {
-        name: form.name.value,
-        email: form.email.value,
-        password: form.password.value,
-        dob: form.dob.value,
-        acceptedTerms: form.acceptedTerms.checked
-    });
+  const userTableBody = document.querySelector('#userTableBody');
+  createUserTableRow({
+    name: registrationForm.elements.name.value,
+    email: registrationForm.elements.email.value,
+    password: registrationForm.elements.password.value,
+    dob: registrationForm.elements.dob.value,
+    acceptedTerms: registrationForm.elements.acceptedTerms.checked
+  });
 });
 
-function addRowToTable(tableBody, userData) {
-    const newRow = tableBody.insertRow();
-    
-    // Add borders and padding to each cell
-    const cellStyle = 'border border-gray-300 p-2';
+function createUserTableRow(userData) {
+  const newRow = userTableBody.insertRow();
 
-    const nameCell = newRow.insertCell();
-    nameCell.textContent = userData.name;
-    nameCell.className = cellStyle;
+  const cellStyle = 'border border-gray-300 p-2';
 
-    const emailCell = newRow.insertCell();
-    emailCell.textContent = userData.email;
-    emailCell.className = cellStyle;
+  const nameCell = newRow.insertCell();
+  nameCell.textContent = userData.name;
+  nameCell.className = cellStyle;
 
-    const passwordCell = newRow.insertCell();
-    passwordCell.textContent = userData.password;
-    passwordCell.className = cellStyle;
+  const emailCell = newRow.insertCell();
+  emailCell.textContent = userData.email;
+  emailCell.className = cellStyle;
 
-    const dobCell = newRow.insertCell();
-    dobCell.textContent = userData.dob;
-    dobCell.className = cellStyle;
+  const passwordCell = newRow.insertCell();
+  passwordCell.textContent = userData.password;
+  passwordCell.className = cellStyle;
 
-    const acceptedTermsCell = newRow.insertCell();
-    acceptedTermsCell.textContent = userData.acceptedTerms;
-    acceptedTermsCell.className = cellStyle;
-        }
+  const dobCell = newRow.insertCell();
+  dobCell.textContent = userData.dob;
+  dobCell.className = cellStyle;
+
+  const acceptedTermsCell = newRow.insertCell();
+  acceptedTermsCell.textContent = userData.acceptedTerms ? 'Yes' : 'No';
+  acceptedTermsCell.className = cellStyle;
+}
